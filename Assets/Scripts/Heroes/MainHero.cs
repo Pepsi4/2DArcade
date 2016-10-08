@@ -4,82 +4,49 @@ using UnityEngine.UI;
 public class MainHero : MonoBehaviour
 {
     #region Fields and Properties
-    GameObject oldMan;
 
     private float speed = 0.015f;
 
     static private bool isCanGo = true;
+
     static private bool isTheEndOfPart = false;
     private bool isLeft = false;
     private bool isRight = false;
 
     static public bool IsTheEndOfPart
     {
-        get
-        {
-            return isTheEndOfPart;
-        }
-        set
-        {
-            isTheEndOfPart = value;
-        }
+        get { return isTheEndOfPart; }
+        set { value = isTheEndOfPart; }
     }
-
 
     static public bool IsCanGo
     {
-        get
-        {
-            return isCanGo;
-        }
-        set
-        {
-            isCanGo = value;
-        }
+        get { return isCanGo; }
+        set { isCanGo = value; }
     }
 
     public bool IsLeft
     {
-        get
-        {
-            return isLeft;
-        }
-        set
-        {
-            isLeft = value;
-        }
+        get { return isLeft; }
+        set { isLeft = value; }
     }
 
     public bool IsRight
     {
-        get
-        {
-            return isRight;
-        }
-        set
-        {
-            isRight = value;
-        }
-    }
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-        set
-        {
-            speed = value;
-        }
+        get { return isRight; }
+        set { isRight = value; }
     }
 
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
 
     #endregion
 
     void Start()
     {
-        oldMan = GameObject.Find("OldMan");
-
     }
 
     public void Update()
@@ -87,54 +54,56 @@ public class MainHero : MonoBehaviour
         IsGoing();
         IsStaying();
 
-        if (Input.GetKeyDown(KeyCode.F) && !IsTheEndOfPart)
-        {
-            IsTheOldManIsNear();
-            isLeft = false;
-            isRight = true;
-        }
-
         if (IsTheEndOfPart && this.transform.position.x <= 16)
         {
-            EndOfPart();
+            GoToNextScene();
         }
-
     }
+
+    public bool IsPressedF()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && !IsTheEndOfPart)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     void MainHeroGo(string vect)
     {
-        if(vect == "Left")
+        if (vect == "Left")
         {
             GameObject.Find("MainHero").transform.Translate(-speed, 0, 0);
         }
-        if(vect == "Right")
+        if (vect == "Right")
         {
             GameObject.Find("MainHero").transform.Translate(speed, 0, 0);
         }
     }
 
     //Is someone or something is near to main hero
-    private bool IsNear(string name)
+    public bool IsNear(string name)
     {
-        Collider2D[] coll = Physics2D.OverlapAreaAll(new Vector2(transform.position.x + 3, transform.position.y + 3), new Vector2(transform.position.x, transform.position.y));
+        //inicialzation gm
+        GameObject gm = GameObject.Find(name);
+        //float mainHeroSizeX = GameObject.Find("MainHero").GetComponent<BoxCollider2D>().size.x;
+        float gmSizeX = GameObject.Find(name).GetComponent<BoxCollider2D>().size.x;
+
+        //Check if the gm's area has MainHero
+        Collider2D[] coll = Physics2D.OverlapAreaAll(new Vector2(gm.transform.position.x - gmSizeX / 2, gm.transform.position.y - 2), new Vector2(gm.transform.position.x + gmSizeX / 2, gm.transform.position.y + 2));
+        //Debug.Log((new Vector2(gm.transform.position.x, gm.transform.position.y - 1) + " " + new Vector2(gm.transform.position.x + gm.GetComponent<BoxCollider2D>().size.x - mainHeroSizeX / 2, gm.transform.position.y + 0.5f)));
         foreach (Collider2D collider in coll)
         {
-            if (collider.gameObject.name == name)
+            if (collider.gameObject.name == "MainHero")
             {
                 return true;
             }
         }
         return false;
-    }
-
-    //Check if the OldMan is near
-    void IsTheOldManIsNear()
-    {
-        if (IsNear("OldMan"))
-        {
-            DialogInterface dialogInterface = new DialogInterface();
-            dialogInterface.ShowTheDialogWindow(true);
-        }
     }
 
     //If the main hero do nothing
@@ -172,7 +141,7 @@ public class MainHero : MonoBehaviour
         }
     }
 
-    void EndOfPart()
+    void GoToNextScene()
     {
         IsCanGo = false;
         AnimationGoRight();

@@ -56,12 +56,13 @@
      <Compile Include="Assets\Scripts\MiniGame\Triggers.cs" />
      <Compile Include="Assets\Scripts\MiniGame\UI.cs" />
      <Compile Include="Assets\Scripts\MiniGame\UI_SCENE_2.cs" />
-     <Compile Include="Assets\Scripts\PortalScene_1\AreaNextScene.cs" />
-     <Compile Include="Assets\Scripts\PortalScene_1\DialogInterface.cs" />
-     <Compile Include="Assets\Scripts\PortalScene_1\MainHero.cs" />
-     <Compile Include="Assets\Scripts\Street\MainHeroStreet.cs" />
-     <Compile Include="Assets\Scripts\Street\ShopBilding.cs" />
+     <Compile Include="Assets\Scripts\Shop\ShopBilding.cs" />
+     <Compile Include="Assets\Scripts\Street\MainHeroStreet_0.cs" />
+     <Compile Include="Assets\Scripts\Street_1\AreaNextScene.cs" />
+     <Compile Include="Assets\Scripts\Street_1\DialogInterface.cs" />
+     <Compile Include="Assets\Scripts\Street_1\MainHeroStreet_1.cs" />
      <None Include="Assets\Resources\Texts\OldManDialogText.txt" />
+     <None Include="Assets\Resources\Texts\TableStreet0.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity 3d/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

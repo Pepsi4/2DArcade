@@ -64,7 +64,7 @@ public class DialogInterface : MonoBehaviour
         //Hide the dialog text
         dialogText.GetComponent<Text>().enabled = false;
 
-        //Main hero againg can go anywhere 
+        //Main hero again can go anywhere 
         MainHero.IsCanGo = true;
     }
 
@@ -72,11 +72,11 @@ public class DialogInterface : MonoBehaviour
     {
     }
 
-    public void ShowTheDialogWindow(bool IsTheEndOfPart)
+    public void ShowTheDialogWindow(bool isTheEndOfPart, string textName)
     {
         Counter++;
         ShowTheDialogInterface();
-        TextAsset txt = Resources.Load<TextAsset>("Texts/OldManDialogText");
+        TextAsset txt = Resources.Load<TextAsset>("Texts/" + textName);
 
         //Here can be an excention "out of range"
         try
@@ -93,7 +93,7 @@ public class DialogInterface : MonoBehaviour
         catch
         {
             HideTheDialogInterface();
-            if(IsTheEndOfPart)
+            if(isTheEndOfPart)
             {
                 MainHero.IsTheEndOfPart = true;
             }
