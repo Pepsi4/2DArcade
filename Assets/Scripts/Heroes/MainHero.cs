@@ -19,8 +19,7 @@ public class MainHero : MonoBehaviour
         set { value = isTheEndOfPart; }
     }
 
-    static public bool IsCanGo
-    {
+    static public bool IsCanGo    {
         get { return isCanGo; }
         set { isCanGo = value; }
     }
@@ -60,7 +59,7 @@ public class MainHero : MonoBehaviour
         }
     }
 
-    public bool IsPressedF()
+    public static bool IsPressedF()
     {
         if (Input.GetKeyDown(KeyCode.F) && !IsTheEndOfPart)
         {

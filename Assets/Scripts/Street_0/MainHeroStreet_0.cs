@@ -19,7 +19,7 @@ public class MainHeroStreet_0 : MonoBehaviour
     {
         mainHero.Update();
 
-        if (mainHero.IsPressedF() == true)
+        if (MainHero.IsPressedF())
         {
             IsTableIsNear();
             IsBuildingIsNear();

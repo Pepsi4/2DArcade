@@ -41,12 +41,14 @@ public class ShopBilding : MonoBehaviour
             Select[1] = ">";    // "No"
             Select[0] = " ";    // "Yes"
             ChangeTheText();
+            Debug.Log(Select[0] + " " + Select[1]);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Select[0] = ">";    // "Yes"
             Select[1] = " ";    // "No"
             ChangeTheText();
+            Debug.Log(Select[0] + " " + Select[1]);
         }
     }
 
@@ -68,10 +70,6 @@ public class ShopBilding : MonoBehaviour
         }
 
 
-        
-
-        Debug.Log(Counter);
-
     }
 
     void Counter_1()
@@ -90,8 +88,8 @@ public class ShopBilding : MonoBehaviour
 
     void Counter_2()
     {
-        input += Select[0];
-        input = "      Sword(+2 dmg)\n";
+        input = Select[0];
+        input += "      Sword(+2 dmg)\n";
         input += Select[1];
         input += "      Shield(+1 arrmor)\n";
 

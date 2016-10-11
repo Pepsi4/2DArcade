@@ -45,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Arena\Controller.cs" />
+     <Compile Include="Assets\Scripts\Arena\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Arena\HeroController.cs" />
      <Compile Include="Assets\Scripts\Heroes\MainHero.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Area.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Block.cs" />
@@ -57,7 +60,7 @@
      <Compile Include="Assets\Scripts\MiniGame\UI.cs" />
      <Compile Include="Assets\Scripts\MiniGame\UI_SCENE_2.cs" />
      <Compile Include="Assets\Scripts\Shop\ShopBilding.cs" />
-     <Compile Include="Assets\Scripts\Street\MainHeroStreet_0.cs" />
+     <Compile Include="Assets\Scripts\Street_0\MainHeroStreet_0.cs" />
      <Compile Include="Assets\Scripts\Street_1\AreaNextScene.cs" />
      <Compile Include="Assets\Scripts\Street_1\DialogInterface.cs" />
      <Compile Include="Assets\Scripts\Street_1\MainHeroStreet_1.cs" />
