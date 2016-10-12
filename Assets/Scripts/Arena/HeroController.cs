@@ -9,44 +9,54 @@ public class HeroController : MonoBehaviour
     public static int enemyHealth = 20;
 
     private float deltaTime = 2;
-    private bool isWaiting; //should we wait or not
+    private bool isWaitingNextRound; //should we wait or not
 
     private float fillAmount; //for fogging
+    private bool isEndOfScene;
+    
 
     #endregion
-
+   
     void Update()
     {
-        EndOfScene();
-        if (MainHero.IsPressedF())
+        if (isEndOfScene == false)
         {
-            //Checking where is the contoler and makes demage to an enemy
-            Controller.IsCanGo = false;
-            UpdateEnemyHelth();
-            isWaiting = true;
+            if (MainHero.IsPressedF() && isWaitingNextRound == false)
+            {
+                //Checking where is the contoler and makes demage to an enemy
+                Controller.IsCanGo = false;
+                UpdateEnemyHelth();
+                isWaitingNextRound = true;
+            }
+            //Checking, if we should wait 2 sec
+            CheckTimer();
         }
 
-        //Checking, if we should wait 2 sec
-        CheckTimer();
+        if (heroHealth <= 0 || enemyHealth <= 0)
+        {
+            EndOfScene();
+            isEndOfScene = true;
+        }
+
     }
 
     void CheckTimer()
     {
         //Waiting 2 seconds
-        if (isWaiting)
+        if (isWaitingNextRound)
         {
-            if (Wait())
+            if (WaitNextRound())
             {
                 UpdateHeroHealth();
                 Controller.IsCanGo = true;
-                isWaiting = false;
+                isWaitingNextRound = false;
             }
         }
     }
 
 
 
-    bool Wait()
+    bool WaitNextRound()
     {
         if (deltaTime <= 0)
         {

@@ -142,6 +142,10 @@ public class Controller : MonoBehaviour
             case "GreenArea_3":
                 HeroDmg = 4;
                 break;
+
+            case "WhiteArea":
+                heroDmg = 0;
+                break;
         }
     }
 
