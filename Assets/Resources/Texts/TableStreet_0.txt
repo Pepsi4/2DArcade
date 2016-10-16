@@ -1,2 +1,2 @@
 Here is example how to use that txt file and convert it to replics in the game: HEREISTHETEXT || HERONAME
-Shop <----|----> Arena   
+Shop <----|----> Arena   || TABLE

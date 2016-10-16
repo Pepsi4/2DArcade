@@ -48,7 +48,9 @@
      <Compile Include="Assets\Scripts\Arena\Controller.cs" />
      <Compile Include="Assets\Scripts\Arena\Enemy.cs" />
      <Compile Include="Assets\Scripts\Arena\HeroController.cs" />
+     <Compile Include="Assets\Scripts\ArenaInfo.cs" />
      <Compile Include="Assets\Scripts\Heroes\MainHero.cs" />
+     <Compile Include="Assets\Scripts\Info.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Area.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Block.cs" />
      <Compile Include="Assets\Scripts\MiniGame\Bonus.cs" />
@@ -61,11 +63,13 @@
      <Compile Include="Assets\Scripts\MiniGame\UI_SCENE_2.cs" />
      <Compile Include="Assets\Scripts\Shop\ShopBilding.cs" />
      <Compile Include="Assets\Scripts\Street_0\MainHeroStreet_0.cs" />
+     <Compile Include="Assets\Scripts\Street_0\NextLvlStreet_0.cs" />
      <Compile Include="Assets\Scripts\Street_1\AreaNextScene.cs" />
+     <Compile Include="Assets\Scripts\Street_1\AreaPastScene.cs" />
      <Compile Include="Assets\Scripts\Street_1\DialogInterface.cs" />
      <Compile Include="Assets\Scripts\Street_1\MainHeroStreet_1.cs" />
      <None Include="Assets\Resources\Texts\OldManDialogText.txt" />
-     <None Include="Assets\Resources\Texts\TableStreet0.txt" />
+     <None Include="Assets\Resources\Texts\TableStreet_0.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity 3d/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

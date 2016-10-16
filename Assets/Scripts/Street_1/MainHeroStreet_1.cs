@@ -1,34 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainHeroStreet_1 : MonoBehaviour {
+public class MainHeroStreet_1 : MonoBehaviour
+{
     #region Fileds
 
     private MainHero mainHero;
+    private DialogInterface dialogInterface;
 
     #endregion
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-	    mainHero = GameObject.Find("MainHero").AddComponent<MainHero>();
+        //for the future using classes
+        mainHero = GameObject.Find("MainHero").AddComponent<MainHero>();
+
+        //won/lost the last game
+        if (ArenaInfo.IsWon == true)
+        {
+            DialogInterface.ShowTheDialogWindow(false, "OldManDialogText");
+        }
     }
-	
-	void Update () {
-	
-	}
+
+
+
+
+
+    void Update()
+    {
+        IsTheOldManIsNear();
+
+
+    }
 
     //Check if the OldMan is near
     void IsTheOldManIsNear()
     {
-        if (mainHero.IsNear("OldMan"))
+        if (MainHero.IsPressedF())
         {
-            TheOldManIsNear();
+            if (mainHero.IsNear("OldMan"))
+            {
+                TheOldManIsNear();
+            }
         }
     }
 
     void TheOldManIsNear()
     {
-        DialogInterface dialogInterface = new DialogInterface();
-        dialogInterface.ShowTheDialogWindow(true, "OldManDialogText");
+        DialogInterface.ShowTheDialogWindow(true, "OldManDialogText", true);
     }
 }

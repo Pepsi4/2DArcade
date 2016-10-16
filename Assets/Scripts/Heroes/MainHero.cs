@@ -10,13 +10,13 @@ public class MainHero : MonoBehaviour
     static private bool isCanGo = true;
 
     static private bool isTheEndOfPart = false;
-    private bool isLeft = false;
-    private bool isRight = false;
+    static private bool isLeft = false;
+    static private bool isRight = false;
 
     static public bool IsTheEndOfPart
     {
         get { return isTheEndOfPart; }
-        set { value = isTheEndOfPart; }
+        set { isTheEndOfPart = value; }
     }
 
     static public bool IsCanGo    {
@@ -24,13 +24,13 @@ public class MainHero : MonoBehaviour
         set { isCanGo = value; }
     }
 
-    public bool IsLeft
+    static public bool IsLeft
     {
         get { return isLeft; }
         set { isLeft = value; }
     }
 
-    public bool IsRight
+    static public bool IsRight
     {
         get { return isRight; }
         set { isRight = value; }
@@ -46,6 +46,21 @@ public class MainHero : MonoBehaviour
 
     void Start()
     {
+        //using classes
+        //DialogInterface dialogInterface = GameObject.Find("MainHero").AddComponent<DialogInterface>();
+
+        // Where should shows the main hero: right or left side
+        if (Info.MainHeroPosition == "left")
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+        }
+
+        if (Info.MainHeroPosition == "right")
+        {
+            transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y, -1);
+        }
+
+
     }
 
     public void Update()
@@ -53,7 +68,7 @@ public class MainHero : MonoBehaviour
         IsGoing();
         IsStaying();
 
-        if (IsTheEndOfPart && this.transform.position.x <= 16)
+        if (IsTheEndOfPart && this.transform.position.x <= 3)
         {
             GoToNextScene();
         }
@@ -140,11 +155,11 @@ public class MainHero : MonoBehaviour
         }
     }
 
-    void GoToNextScene()
+    static void  GoToNextScene()
     {
         IsCanGo = false;
         AnimationGoRight();
-        this.transform.Translate(transform.position.x * Time.deltaTime, 0, 0);
+        GameObject.Find("MainHero").transform.Translate(GameObject.Find("MainHero").transform.position.x * Time.deltaTime, 0, 0);
     }
 
     static void AnimationGoRight()

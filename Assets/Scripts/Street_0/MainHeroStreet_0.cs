@@ -12,7 +12,6 @@ public class MainHeroStreet_0 : MonoBehaviour
     void Start()
     {
         mainHero = GameObject.Find("MainHero").AddComponent<MainHero>();
-        table = GameObject.Find("MainHero").AddComponent<DialogInterface>();
     }
 
     void Update()
@@ -21,16 +20,14 @@ public class MainHeroStreet_0 : MonoBehaviour
 
         if (MainHero.IsPressedF())
         {
+            MainHero.IsLeft = true;
             IsTableIsNear();
             IsBuildingIsNear();
-            
         }
     }
 
     void IsBuildingIsNear()
     {
-        Debug.Log(mainHero.IsNear("BLD"));
-
         if (mainHero.IsNear("BLD"))
         {
             BuildingIsNear();
@@ -39,7 +36,7 @@ public class MainHeroStreet_0 : MonoBehaviour
 
     void BuildingIsNear()
     {
-        Application.LoadLevel("Street_1");
+        Application.LoadLevel("shop");
     }
 
     void IsTableIsNear()
@@ -52,11 +49,6 @@ public class MainHeroStreet_0 : MonoBehaviour
 
     void TableIsNear()
     {
-        Debug.Log("table is near");
-        table.ShowTheDialogWindow(false , "TableStreet0");
+        DialogInterface.ShowTheDialogWindow(false , "TableStreet_0");
     }
-
-
-
-
 }

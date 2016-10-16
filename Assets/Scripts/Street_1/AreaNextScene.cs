@@ -7,7 +7,8 @@ public class AreaNextScene : MonoBehaviour {
     {
         if(col.gameObject.name == "MainHero")
         {
-            Application.LoadLevel("first");
+            MainHero.IsTheEndOfPart = false;
+            Application.LoadLevel("arena");
         }
     }
 }

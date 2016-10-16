@@ -21,10 +21,6 @@ public class Controller : MonoBehaviour
     private static int lvl;
     private static int heroDmg = 1;
 
-    //private bool onGreenArea_1;
-    //private bool onGreenArea_2;
-    //private bool onGreenArea_3;
-
     private static bool isCanGo = true;
     private static bool isRight = true;
     private static bool isLeft;

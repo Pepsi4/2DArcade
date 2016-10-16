@@ -31,21 +31,21 @@ public class DialogInterface : MonoBehaviour
         HideTheDialogInterface();
     }
 
-    private void Initialization()
+    private static void Initialization()
     {
         dialogImage = GameObject.Find("Canvas/DialogImage");
         dialogText = GameObject.Find("Canvas/DialogText");
         dialogName = GameObject.Find("Canvas/DialogName");
     }
 
-    private void Synsynchronization()
+    private static void Synsynchronization()
     {
         GameObject.Find("Canvas/DialogImage").GetComponent<Image>().sprite = dialogImage.GetComponent<Image>().sprite;
         GameObject.Find("Canvas/DialogText").GetComponent<Text>().text = dialogText.GetComponent<Text>().text;
         GameObject.Find("Canvas/DialogName").GetComponent<Text>().text = dialogName.GetComponent<Text>().text;
     }
 
-    private void ShowTheDialogInterface()
+    private static void ShowTheDialogInterface()
     {
         dialogImage.GetComponent<Image>().enabled = true;
         dialogName.GetComponent<Text>().enabled = true;
@@ -55,7 +55,7 @@ public class DialogInterface : MonoBehaviour
         MainHero.IsCanGo = false;
     }
 
-    private void HideTheDialogInterface()
+    private static void HideTheDialogInterface()
     {
         //Hide the dialog image
         dialogImage.GetComponent<Image>().enabled = false;
@@ -72,7 +72,39 @@ public class DialogInterface : MonoBehaviour
     {
     }
 
-    public void ShowTheDialogWindow(bool isTheEndOfPart, string textName)
+    public static void ShowTheDialogWindow(bool isTheEndOfPart, string textName)
+    {
+        Counter++;
+        ShowTheDialogInterface();
+        TextAsset txt = Resources.Load<TextAsset>("Texts/" + textName);
+
+        //Here can be an excention "out of range"
+        try
+        {
+            Debug.Log(Counter);
+            string[] text = txt.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            //Split the text from .txt file to dialogName and dialogText
+            //It is spliting by string "||"
+            string dialogText = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[0];
+            string dialogName = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[1];
+            
+            SetDialogInterface(dialogName, dialogText);
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Debug.Log("exp");
+            HideTheDialogInterface();
+            Counter = 0;
+            if (isTheEndOfPart)
+            {
+                MainHero.IsTheEndOfPart = true;
+            }
+            return;
+        }
+    }
+
+    public static void ShowTheDialogWindow(bool isTheEndOfPart, string textName, bool disableBorderNextLvl)
     {
         Counter++;
         ShowTheDialogInterface();
@@ -87,29 +119,31 @@ public class DialogInterface : MonoBehaviour
             //It is spliting by string "||"
             string dialogText = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[0];
             string dialogName = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[1];
-            
+
             SetDialogInterface(dialogName, dialogText);
         }
-        catch
+        catch (IndexOutOfRangeException)
         {
             HideTheDialogInterface();
-            if(isTheEndOfPart)
+            Counter = 0;
+            if (isTheEndOfPart)
             {
                 MainHero.IsTheEndOfPart = true;
+                if (disableBorderNextLvl == true)
+                {
+                    GameObject.Find("BorderNextLvl").GetComponent<BoxCollider2D>().isTrigger = true;
+                }
             }
-            return;
         }
-
-
     }
 
-    public void SetDialogInterface(string name, string text)
+
+    public static void SetDialogInterface(string name, string text)
     {
         dialogText.GetComponent<Text>().text = text;
         dialogName.GetComponent<Text>().text = name;
         Synsynchronization();
     }
-
 
 
 }
