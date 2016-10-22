@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class HeroController : MonoBehaviour
 {
     #region Fileds
     public static int lvl = 1;
-    public static int heroHealth = 15;
-    public static int enemyHealth = 2;
+    private int heroMaxHealth = 20;
+    private int heroHealth = 20;
+    private int enemyHealth = 20;
+    private int enemyMaxHealth = 20;
 
     private float deltaTimeNextRound = 2;   //float for timer. w8ing 2 secs before the controller could move again
     private bool isWaitingNextRound; //should we wait or not
-    
+
     private float fillAmount; //float for fogging. 1 = max.
     private bool isEndOfScene; //Is the end of scene now.
 
@@ -18,15 +21,18 @@ public class HeroController : MonoBehaviour
     private bool isWaitedTheEnd;  //when 2 secs passed
 
     private DialogInterface dialogIterface;
+
+    
     #endregion
 
     void Start()
     {
+        StartCoroutine("Test", 3f);
     }
 
     void Update()
     {
-        
+
         SceneTriggers(); //Pressed F, etc
         CheckTimer(); //Checking, if we should wait 2 seconds for next round
         CheckHealth(); //what to do, if heroHealth or enemyHealth <= 0 
@@ -36,9 +42,10 @@ public class HeroController : MonoBehaviour
             //Actions is here(after timer)
             Info.MainHeroPosition = "right";
             MainHero.IsLeft = true;
+            MainHero.IsCanTalk = false;
             Application.LoadLevel("street_1");
         }
-        
+        //HealthController.UpdateHeroHealthBar(heroHealth, heroMaxHealth, enemyHealth, enemyMaxHealth);
         
     }
 
@@ -71,7 +78,7 @@ public class HeroController : MonoBehaviour
             }
         }
     }
-    
+
     void CheckHealth() //for both heroes
     {
         //When the game is over
@@ -80,14 +87,12 @@ public class HeroController : MonoBehaviour
             isEndOfScene = true;
             if (heroHealth <= 0)
             {
-                ArenaInfo.IsWon = false;
-                Debug.Log(ArenaInfo.IsWon);
+                ArenaInfo.AfterGame = (int)StatusAfterGame.lose;
             }
 
             if (enemyHealth <= 0)
             {
-                ArenaInfo.IsWon = true;
-                Debug.Log(ArenaInfo.IsWon);
+                ArenaInfo.AfterGame = (int)StatusAfterGame.won;
             }
         }
     }
@@ -108,7 +113,13 @@ public class HeroController : MonoBehaviour
             }
         }
     }
-    
+
+    IEnumerator WaitNextRound()
+    {
+        yield return new WaitForSeconds(4);
+
+    }
+
     bool WaitingNextRound()
     {
         if (deltaTimeNextRound <= 0)
@@ -136,20 +147,22 @@ public class HeroController : MonoBehaviour
             return false;
         }
     }
-    
+
     void UpdateEnemyHelth()
     {
         Controller.CheckGreenAreaDmg();
         enemyHealth -= Controller.HeroDmg;
         if (enemyHealth <= 0) enemyHealth = 0;
-        GameObject.Find("Canvas/EnemyHealthBG/EnemyHealth").GetComponent<Text>().text = enemyHealth + " / 20";
+        GameObject.Find("Canvas/EnemyUI/EnemyHealth").GetComponent<Text>().text = enemyHealth + " / " + enemyMaxHealth;
+        HealthController.UpdateEnemyHealthBar(enemyHealth, enemyMaxHealth);
     }
 
     void UpdateHeroHealth()
     {
         heroHealth -= Enemy.MakeDmg();
         if (heroHealth <= 0) heroHealth = 0;
-        GameObject.Find("Canvas/MainHeroHealthBG/MainHeroHealth").GetComponent<Text>().text = heroHealth + " / 20";
+        GameObject.Find("Canvas/HeroUI/HeroHealth").GetComponent<Text>().text = heroHealth + " / " + heroMaxHealth;
+        HealthController.UpdateHeroHealthBar(heroHealth, heroMaxHealth);
     }
 
     void FoggingTheScreen()

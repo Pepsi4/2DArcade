@@ -81,24 +81,26 @@ public class DialogInterface : MonoBehaviour
         //Here can be an excention "out of range"
         try
         {
-            Debug.Log(Counter);
             string[] text = txt.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             //Split the text from .txt file to dialogName and dialogText
             //It is spliting by string "||"
             string dialogText = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[0];
             string dialogName = text[Counter].Split(new string[] { "||" }, StringSplitOptions.None)[1];
-            
+
             SetDialogInterface(dialogName, dialogText);
         }
         catch (IndexOutOfRangeException)
         {
-            Debug.Log("exp");
             HideTheDialogInterface();
             Counter = 0;
             if (isTheEndOfPart)
             {
                 MainHero.IsTheEndOfPart = true;
+            }
+            if (!isTheEndOfPart)
+            {
+                MainHero.IsTheEndOfPart = false;
             }
             return;
         }
@@ -129,13 +131,61 @@ public class DialogInterface : MonoBehaviour
             if (isTheEndOfPart)
             {
                 MainHero.IsTheEndOfPart = true;
-                if (disableBorderNextLvl == true)
-                {
-                    GameObject.Find("BorderNextLvl").GetComponent<BoxCollider2D>().isTrigger = true;
-                }
+            }
+            if (!isTheEndOfPart)
+            {
+                MainHero.IsTheEndOfPart = false;
+            }
+            if (disableBorderNextLvl == true)
+            {
+                GameObject.Find("BorderNextLvl").GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
     }
+
+
+    public static void ShowTheDialogWindowAfterGame(bool isWon, bool isCanTalkAfter)
+    {
+        ShowTheDialogInterface();
+        Counter++;
+
+        string name = null;
+        string dialogText = null;
+
+        if (isWon)
+        {
+            name = "You won!";
+            dialogText = "Congratulations! You received ";
+            dialogText += ArenaInfo.RandomAward();
+            dialogText += " gold";
+        }
+
+        if (!isWon)
+        {
+            name = "You lose!";
+            dialogText = "Too bad!";
+        }
+        
+        SetDialogInterface(name, dialogText);
+
+        //exit
+        if (Counter == 2)
+        {
+            if (isCanTalkAfter == true)
+            {
+                MainHero.IsCanTalk = true;
+            }
+            else
+            {
+                MainHero.IsCanTalk = false;
+            }
+            Counter = 0;
+            HideTheDialogInterface();
+            ArenaInfo.AfterGame = 0;
+        }
+    }
+
+
 
 
     public static void SetDialogInterface(string name, string text)

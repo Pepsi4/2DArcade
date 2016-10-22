@@ -12,6 +12,9 @@ public class MainHero : MonoBehaviour
     static private bool isTheEndOfPart = false;
     static private bool isLeft = false;
     static private bool isRight = false;
+    static private bool isCanTalk = true;
+
+    private static int gold;
 
     static public bool IsTheEndOfPart
     {
@@ -19,7 +22,8 @@ public class MainHero : MonoBehaviour
         set { isTheEndOfPart = value; }
     }
 
-    static public bool IsCanGo    {
+    static public bool IsCanGo
+    {
         get { return isCanGo; }
         set { isCanGo = value; }
     }
@@ -40,6 +44,18 @@ public class MainHero : MonoBehaviour
     {
         get { return speed; }
         set { speed = value; }
+    }
+
+    public static bool IsCanTalk
+    {
+        get { return isCanTalk; }
+        set { isCanTalk = value; }
+    }
+
+    public static int Gold
+    {
+        get { return gold; }
+        set { gold = value; }
     }
 
     #endregion
@@ -67,6 +83,7 @@ public class MainHero : MonoBehaviour
     {
         IsGoing();
         IsStaying();
+
 
         if (IsTheEndOfPart && this.transform.position.x <= 3)
         {
@@ -107,7 +124,7 @@ public class MainHero : MonoBehaviour
         //float mainHeroSizeX = GameObject.Find("MainHero").GetComponent<BoxCollider2D>().size.x;
         float gmSizeX = GameObject.Find(name).GetComponent<BoxCollider2D>().size.x;
 
-        //Check if the gm's area has MainHero
+        //Checking if the gm's area has MainHero
         Collider2D[] coll = Physics2D.OverlapAreaAll(new Vector2(gm.transform.position.x - gmSizeX / 2, gm.transform.position.y - 2), new Vector2(gm.transform.position.x + gmSizeX / 2, gm.transform.position.y + 2));
         //Debug.Log((new Vector2(gm.transform.position.x, gm.transform.position.y - 1) + " " + new Vector2(gm.transform.position.x + gm.GetComponent<BoxCollider2D>().size.x - mainHeroSizeX / 2, gm.transform.position.y + 0.5f)));
         foreach (Collider2D collider in coll)
@@ -136,6 +153,11 @@ public class MainHero : MonoBehaviour
         }
     }
 
+    public static void ActionsAfterWindowAfterGame()
+    {
+
+    }
+
     //Left and Right
     void IsGoing()
     {
@@ -155,7 +177,7 @@ public class MainHero : MonoBehaviour
         }
     }
 
-    static void  GoToNextScene()
+    static void GoToNextScene()
     {
         IsCanGo = false;
         AnimationGoRight();

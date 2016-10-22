@@ -79,6 +79,8 @@ public class Controller : MonoBehaviour
     #endregion
     void Start()
     {
+        IsCanGo = true;
+
         scroll = GameObject.Find("Canvas/Scroll");
         bg = GameObject.Find("Canvas/BG");
 
