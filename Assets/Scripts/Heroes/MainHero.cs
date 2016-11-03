@@ -15,6 +15,20 @@ public class MainHero : MonoBehaviour
     static private bool isCanTalk = true;
 
     private static int gold;
+    private static int damage;
+    private static int armor;
+
+    static public int Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    public static int Armor
+    {
+        get { return armor; }
+        set { armor = value; }
+    }
 
     static public bool IsTheEndOfPart
     {
