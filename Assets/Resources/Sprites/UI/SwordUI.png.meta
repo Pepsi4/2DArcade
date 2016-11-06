@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1e221ac29000c9c43ab04d25f4b1616b
-timeCreated: 1478350888
+guid: 01953e1e9ee2b144ba256954ebd679a1
+timeCreated: 1478349052
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: coinUI3_0
+    21300000: SwordUI_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -43,8 +43,8 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: 0, y: 1}
-  spriteBorder: {x: 0, y: 10, z: 0, w: 0}
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -54,13 +54,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coinUI3_0
+      name: SwordUI_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 35
-        height: 40
+        y: 0
+        width: 37
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -8,7 +8,9 @@ public class NextLvlStreet_0 : MonoBehaviour {
         if (col.gameObject.name == "MainHero")
         {
             Info.MainHeroPosition = "left";
+            
             Application.LoadLevel("Street_1");
+            
         }
     }
 }

@@ -1,11 +1,15 @@
-﻿using System;
+﻿#define Debug
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopBilding : MonoBehaviour
 {
-    private int counter = 1;
+    private int counter = 0;
+
+    //private string currentScene = "greetings"
+
 
     private int Counter
     {
@@ -26,9 +30,8 @@ public class ShopBilding : MonoBehaviour
 
     void Start()
     {
-        //TODO fix
         selected.Add(true);
-        selected.Add(false);
+        //selected.Add(false);
 
         dialogText = GameObject.Find("Canvas/Text");    //sync
     }
@@ -39,9 +42,17 @@ public class ShopBilding : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            //Counter++;
-            ChangeTheTextPressedF();
+            Counter++;
+            ChangeTheText(true , false);
+            Debug.Log(Counter);
         }
+#if Debug
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Counter: " + Counter);
+            Debug.Log("Lengh of array: " + selected.Count);
+        }
+#endif
     }
 
     void SetTheMarkInArray(ArrayList list, int number)
@@ -65,6 +76,13 @@ public class ShopBilding : MonoBehaviour
         //adding the elements to array
         for (int i = 0; i < size; i++)
         {
+            //if it needs, adding more marks
+            if (size > list.Count)
+            {
+                list.Add(false);
+            }
+
+
             //save all old marks
             if (GetFirstTrueOfArray(list) == i)
             {
@@ -75,18 +93,15 @@ public class ShopBilding : MonoBehaviour
                 list[i] = false;
             }
 
-            //if it needs, adding more marks
-            if (size > list.Count)
-            {
-                list.Add(false);
-            }
+            
 
             //Removing useless elements of array
-            int sizeOfArray = list.Count;
-            if (list.Count > size)
+            
+            if (list.Count >= size)
             {
-                sizeOfArray--;
-                list.Remove(sizeOfArray);
+                int sizeOfArray = list.Count - 1;
+                //list.Remove(sizeOfArray);
+                list.Remove(3);
             }
         }
     }
@@ -102,7 +117,7 @@ public class ShopBilding : MonoBehaviour
             {
                 SetTheMarkInArray(selected, ++number);
                 //sync
-                ChangeTheTextPressedArrow();
+                ChangeTheText(false, true);
             }
         }
 
@@ -114,7 +129,7 @@ public class ShopBilding : MonoBehaviour
             {
                 SetTheMarkInArray(selected, --number);
                 //sync
-                ChangeTheTextPressedArrow();
+                ChangeTheText(false , true);
             }
 
         }
@@ -129,61 +144,38 @@ public class ShopBilding : MonoBehaviour
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
-
-    void ChangeTheTextPressedArrow()
-    {
-        switch (Counter)
-        {
-            case 2:
-                Counter_1(false, true);
-                break;
-
-            case 3:
-                Counter_2(false, true);
-                break;
-
-            case 4:
-                //if (BuyItems(true, false))
-                //{
-                //    Counter++;
-                //}
-                //else
-                //{
-                //    Counter -= 2;
-                //}
-                break;
-
-        }
-    }
+    
 
 
-    void ChangeTheTextPressedF()
+    void ChangeTheText(bool isPressedF , bool isPressedArrow)
     {
         switch (Counter)
         {
             case 1:
-
-                Counter++;
-                Counter_1(true, false);
+                //if (isPressedF) Counter++;
+                
+                Counter_1(isPressedF, isPressedArrow);
 
                 break;
 
             case 2:
-                Counter++;
-                Counter_2(true, false);
+                //if (isPressedF) Counter++;
+                Counter_2(isPressedF, isPressedArrow);
                 break;
 
             case 3:
-                if (BuyItems(true, false))
+                if (!BuyItems(isPressedF, isPressedArrow))
                 {
-                    Counter++;
+                    Counter-= 2;
                 }
-                //else
-                //{
-                //    Counter--;
-                //}
+
+                //BuyItems(isPressedF, isPressedArrow);
+                break;
+
+            case 4:
+                Counter_4();
                 break;
         }
     }
@@ -247,7 +239,12 @@ public class ShopBilding : MonoBehaviour
             if ((bool)selected[0] && MainHero.Gold >= SwordCost) //sword
             {
                 MainHero.Gold -= SwordCost;
-                MainHero.Damage += ShieldArmor;
+                MainHero.Damage += SwordDamage;
+                TopUI.SyncTopUi();
+
+                GoToScene(1);
+                SetTheMarkInArray(selected, 0);
+                return true;
             }
             else if (MainHero.Gold < SwordCost && isPressedF)
             {
@@ -259,6 +256,11 @@ public class ShopBilding : MonoBehaviour
             {
                 MainHero.Gold -= ShieldCost;
                 MainHero.Armor += ShieldArmor;
+                TopUI.SyncTopUi();
+
+                GoToScene(1);
+                SetTheMarkInArray(selected, 0);
+                return true;
             }
             else if (MainHero.Gold < ShieldCost)
             {
@@ -267,6 +269,19 @@ public class ShopBilding : MonoBehaviour
             }
         }
         return true;
+    }
+
+    void Counter_4()
+    {
+        GoToScene(1);
+        SetTheMarkInArray(selected, 0);
+        ChangeTheText(false, false);
+    }
+
+    void GoToScene(int numberOfScene)
+    {
+        Counter = numberOfScene;
+        ChangeTheText(false, false);
     }
 
     bool CheckExit(int numberOfExitButton)
@@ -285,7 +300,6 @@ public class ShopBilding : MonoBehaviour
 
     void NotEnoughGold(int itemCost)
     {
-        //Counter = Counter - 2;
         SetTheMarkInArray(selected, 0);
         string input = null;
 

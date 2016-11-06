@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Street_1\AreaPastScene.cs" />
      <Compile Include="Assets\Scripts\Street_1\DialogInterface.cs" />
      <Compile Include="Assets\Scripts\Street_1\MainHeroStreet_1.cs" />
+     <Compile Include="Assets\Scripts\TopUI.cs" />
      <None Include="Assets\Resources\Texts\TableAfterGame.txt" />
      <None Include="Assets\Resources\Texts\OldManDialogText.txt" />
      <None Include="Assets\Resources\Texts\TableStreet_0.txt" />
