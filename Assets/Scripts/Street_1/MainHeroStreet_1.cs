@@ -24,9 +24,6 @@ public class MainHeroStreet_1 : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(MainHero.IsCanTalk);
-        Debug.Log(ArenaInfo.AfterGame == (int)StatusAfterGame.won);
-        Debug.Log(ArenaInfo.AfterGame);
 
         IsTheOldManIsNear();
         // to enabled go to the next dialog

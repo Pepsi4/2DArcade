@@ -152,11 +152,11 @@ public class DialogInterface : MonoBehaviour
         string name = null;
         string dialogText = null;
 
-        if (isWon)
+        if (isWon && Counter == 1)
         {
             name = "You won!";
             dialogText = "Congratulations! You received ";
-            dialogText += ArenaInfo.RandomAward();
+            dialogText += ArenaInfo.RandomAward(1, 4, true);
             dialogText += " gold";
         }
 
@@ -165,7 +165,7 @@ public class DialogInterface : MonoBehaviour
             name = "You lose!";
             dialogText = "Too bad!";
         }
-        
+
         SetDialogInterface(name, dialogText);
 
         //exit

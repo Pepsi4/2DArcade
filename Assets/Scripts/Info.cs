@@ -7,9 +7,4 @@ public static class Info
     //processing on method Start().
     public static string MainHeroPosition { get; set; } //left or right side ; 
 
-    //private static float MainHeroPositionX { get; set; }
-    //private static float MainHeroPositionY { get; set; }
-
-
-
 }

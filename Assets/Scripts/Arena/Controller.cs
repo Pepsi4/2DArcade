@@ -104,7 +104,7 @@ public class Controller : MonoBehaviour
     }
 
     //Check where the controller is
-   public static string GetGreenArea()
+    public static string GetGreenArea()
     {
         float scrollX = scroll.transform.position.x;
         if (scrollX >= minSizeXGreenArea_3 && scrollX <= maxSizeXGreenArea_3)
@@ -131,14 +131,17 @@ public class Controller : MonoBehaviour
         {
             case "GreenArea_1":
                 HeroDmg = 1;
+                HeroDmg = (int)(MainHero.Damage * 0.25f);
                 break;
 
             case "GreenArea_2":
                 HeroDmg = 2;
+                HeroDmg = (int)(MainHero.Damage * 0.5f);
                 break;
 
             case "GreenArea_3":
-                HeroDmg = 4;
+                HeroDmg = 3;
+                HeroDmg = (int)(MainHero.Damage * 0.75f);
                 break;
 
             case "WhiteArea":

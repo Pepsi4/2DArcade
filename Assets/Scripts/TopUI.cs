@@ -20,6 +20,8 @@ public class TopUI : MonoBehaviour {
 
     static public void SyncTopUi()
     {
+        GameObject.Find("Canvas/TextLvl").GetComponent<Text>().text = "Level: " + MainHero.Level;
+
         GameObject.Find("Canvas/ArmorUISystem/Count").GetComponent<Text>().text = MainHero.Armor.ToString();
         GameObject.Find("Canvas/WeaponUISystem/Count").GetComponent<Text>().text = MainHero.Damage.ToString();
         GameObject.Find("Canvas/MoneyUISystem/Count").GetComponent<Text>().text = MainHero.Gold.ToString();

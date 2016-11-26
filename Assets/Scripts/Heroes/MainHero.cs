@@ -18,6 +18,30 @@ public class MainHero : MonoBehaviour
     private static int damage = 3;
     private static int armor = 1;
 
+    private static int heroHealth = 20;
+    private static int heroMaxHealth = 20;
+
+    private static int level = 1;
+
+    static public int HeroHealth
+    {
+        get { return heroHealth; }
+        set { heroHealth = value; }
+    }
+
+    static public int HeroMaxHealth
+    {
+        get { return heroMaxHealth; }
+        set { heroMaxHealth = value; }
+    }
+
+
+    static public int Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
+
     static public int Damage
     {
         get { return damage; }
@@ -75,7 +99,7 @@ public class MainHero : MonoBehaviour
     #endregion
 
     void Start()
-    { 
+    {
         // Where should shows the main hero: right or left side
         if (Info.MainHeroPosition == "left")
         {
@@ -119,11 +143,20 @@ public class MainHero : MonoBehaviour
     {
         if (vect == "Left")
         {
+            //obj
             GameObject.Find("MainHero").transform.Translate(-speed, 0, 0);
+            //UI
+            GameObject.Find("Canvas/TextLvl").transform.Translate(-speed, 0, 0);
+            GameObject.Find("Canvas/PanelLvl").transform.Translate(-speed, 0, 0);
+
         }
         if (vect == "Right")
         {
+            //obj
             GameObject.Find("MainHero").transform.Translate(speed, 0, 0);
+            //UI
+            GameObject.Find("Canvas/TextLvl").transform.Translate(speed, 0, 0);
+            GameObject.Find("Canvas/PanelLvl").transform.Translate(speed, 0, 0);
         }
     }
 

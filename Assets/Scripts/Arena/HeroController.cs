@@ -4,30 +4,23 @@ using System.Collections;
 
 public class HeroController : MonoBehaviour
 {
-    #region Fileds
-    public static int lvl = 1;
-    private int heroMaxHealth = 20;
-    private int heroHealth = 20;
-    private int enemyHealth = 20;
-    private int enemyMaxHealth = 20;
+    #region Fields
+    private int heroHealth = MainHero.HeroHealth;
+    private int heroMaxHealth = MainHero.HeroMaxHealth;
+    private int enemyHealth = Enemy.EnemyHealth;
+    private int enemyMaxHealth = Enemy.EnemyMaxHealth;
 
-    //private float deltaTimeNextRound = 2;   //float for timer. w8ing 2 secs before the controller could move again
+
     private bool isWaitingNextRound; //should we wait or not
 
     private float fillAmount; //float for fogging. 1 = max.
     private bool isEndOfScene; //Is the end of scene now.
-
-    //private float deltaTimeTheEnd = 2; // w8ing 2 seconds before the game will end
-    //private bool isWaitedTheEnd;  //when 2 secs passed
 
     private DialogInterface dialogIterface;
 
 
     #endregion
 
-    void Start()
-    {
-    }
 
     void Update()
     {
@@ -40,6 +33,7 @@ public class HeroController : MonoBehaviour
         Info.MainHeroPosition = "right";
         MainHero.IsLeft = true;
         MainHero.IsCanTalk = false;
+        TopUI.SyncTopUi();
         Application.LoadLevel("street_1");
     }
 
@@ -52,13 +46,16 @@ public class HeroController : MonoBehaviour
                 //Checking where is the contoler and makes demage to an enemy
                 Controller.IsCanGo = false;
                 UpdateEnemyHelth();
+
+                StartCoroutine("WaitNextRound");
                 CheckHealth(); //what to do, if heroHealth or enemyHealth <= 0
                 StartCoroutine("CheckTheEndOfScene");
                 isWaitingNextRound = true;
-                StartCoroutine("WaitNextRound");
             }
         }
     }
+
+
 
     void CheckHealth() //for both heroes
     {
@@ -81,15 +78,17 @@ public class HeroController : MonoBehaviour
     IEnumerator WaitNextRound()
     {
         yield return new WaitForSeconds(2);
-        CheckHealth(); //what to do, if heroHealth or enemyHealth <= 0
-        isWaitingNextRound = false;
+
 
         if (isEndOfScene == false)
         {
             UpdateHeroHealth();
+            CheckHealth(); //what to do, if heroHealth or enemyHealth <= 0
             Controller.IsCanGo = true;
             StartCoroutine("CheckTheEndOfScene");
         }
+        
+        isWaitingNextRound = false;
     }
 
     IEnumerator CheckTheEndOfScene()
@@ -98,13 +97,11 @@ public class HeroController : MonoBehaviour
         {
             //Actions is here(before timer)
             Controller.IsCanGo = false;
-            //isWaitedTheEnd = true;
             yield return new WaitForSeconds(1);
             for (int i = 0; i < 100; i++)
             {
                 FoggingTheScreen();
                 yield return new WaitForSeconds(0.02f);
-                //yield return new WaitUntil(() => fillAmount >= 1);
             }
 
             ActionsInTheEnd();
