@@ -2,9 +2,11 @@
 
 **Project info:**
 
-GameDev platform: Unity3d 5.4f .
+ GameDev platform: Unity3d 5.4f .
 
-Scripting language: C#.
+ Scripting language: C#.
+ 
+ 
 
 **Screenshots:**
 
