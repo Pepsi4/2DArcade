@@ -6,8 +6,8 @@ Scripting language: C#.
 
 **Screenshots:**
 Arena gameplay:
-https://cloud.githubusercontent.com/assets/10260469/21293776/7f537e20-c536-11e6-80bf-aa5b86270abe.JPG
+![alt text](https://cloud.githubusercontent.com/assets/10260469/21293776/7f537e20-c536-11e6-80bf-aa5b86270abe.JPG)
 
 The Shop:
 
-https://cloud.githubusercontent.com/assets/10260469/21293780/a449c2fc-c536-11e6-94c6-c846cf6adfb0.JPG
+![alt text](https://cloud.githubusercontent.com/assets/10260469/21293780/a449c2fc-c536-11e6-94c6-c846cf6adfb0.JPG)
