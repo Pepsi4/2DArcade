@@ -10,10 +10,10 @@
 
 **Screenshots:**
 
-Arena gameplay:
+![alt text](https://user-images.githubusercontent.com/10260469/28690727-e9817276-7322-11e7-8c4b-58976caabd13.jpg)
 
-![alt text](https://cloud.githubusercontent.com/assets/10260469/21293776/7f537e20-c536-11e6-80bf-aa5b86270abe.JPG)
 
-The Shop:
+![alt text](https://user-images.githubusercontent.com/10260469/28690728-e984e32a-7322-11e7-8a85-d51d21a439d5.jpg)
 
-![alt text](https://cloud.githubusercontent.com/assets/10260469/21293780/a449c2fc-c536-11e6-94c6-c846cf6adfb0.JPG)
+
+![alt text](https://user-images.githubusercontent.com/10260469/28690729-e989e5dc-7322-11e7-8b5d-dc6b96e4d147.jpg)
