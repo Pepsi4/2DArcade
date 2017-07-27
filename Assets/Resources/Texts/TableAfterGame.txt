@@ -1,3 +1,3 @@
 Here is example how to use that txt file and convert it to replics in the game: HEREISTHETEXT || HERONAME
 Greetings traveler   || OldMan
-TEST || Tessst
+Press F and go to the shop or someting || Old Man

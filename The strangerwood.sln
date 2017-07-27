@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{3B768E24-C5E2-9C60-76E2-2494B51EE14A}") = "The strangerwood", "Assembly-CSharp.csproj", "{3D219D31-F188-FA32-500D-29B857B81410}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The strangerwood", "The strangerwood.csproj", "{C21C24AE-BAD2-274B-F311-B60F42A2D29B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3D219D31-F188-FA32-500D-29B857B81410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D219D31-F188-FA32-500D-29B857B81410}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D219D31-F188-FA32-500D-29B857B81410}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D219D31-F188-FA32-500D-29B857B81410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C21C24AE-BAD2-274B-F311-B60F42A2D29B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C21C24AE-BAD2-274B-F311-B60F42A2D29B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C21C24AE-BAD2-274B-F311-B60F42A2D29B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C21C24AE-BAD2-274B-F311-B60F42A2D29B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

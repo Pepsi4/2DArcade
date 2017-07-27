@@ -7,18 +7,12 @@ using UnityEngine.UI;
 public class ShopBilding : MonoBehaviour
 {
     private int counter = 0;
-
-    //private string currentScene = "greetings"
-
-
     private int Counter
     {
         get { return counter; }
         set { counter = value; }
     }
-
-
-    private ArrayList selected = new ArrayList();
+    private ArrayList selected;
 
     private const int SwordCost = 5;
     private const int SwordDamage = 2;
@@ -27,11 +21,10 @@ public class ShopBilding : MonoBehaviour
 
     private static GameObject dialogText;
 
-
     void Start()
     {
+        selected = new ArrayList();
         selected.Add(true);
-        //selected.Add(false);
 
         dialogText = GameObject.Find("Canvas/Text");    //sync
     }
@@ -43,7 +36,7 @@ public class ShopBilding : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Counter++;
-            ChangeTheText(true , false);
+            ChangeTheText(true, false);
             Debug.Log(Counter);
         }
 #if Debug
@@ -82,7 +75,6 @@ public class ShopBilding : MonoBehaviour
                 list.Add(false);
             }
 
-
             //save all old marks
             if (GetFirstTrueOfArray(list) == i)
             {
@@ -93,14 +85,10 @@ public class ShopBilding : MonoBehaviour
                 list[i] = false;
             }
 
-            
-
             //Removing useless elements of array
-            
             if (list.Count >= size)
             {
                 int sizeOfArray = list.Count - 1;
-                //list.Remove(sizeOfArray);
                 list.Remove(3);
             }
         }
@@ -108,8 +96,7 @@ public class ShopBilding : MonoBehaviour
 
     void CheckArrows()
     {
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             int number = GetFirstTrueOfArray(selected);
             //trying to change the mark to the next position (+1)
@@ -121,7 +108,7 @@ public class ShopBilding : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             int number = GetFirstTrueOfArray(selected);
             //trying to change the mark to the next position (+1)
@@ -129,9 +116,8 @@ public class ShopBilding : MonoBehaviour
             {
                 SetTheMarkInArray(selected, --number);
                 //sync
-                ChangeTheText(false , true);
+                ChangeTheText(false, true);
             }
-
         }
     }
 
@@ -146,32 +132,24 @@ public class ShopBilding : MonoBehaviour
         }
         return -1;
     }
-    
 
-
-    void ChangeTheText(bool isPressedF , bool isPressedArrow)
+    void ChangeTheText(bool isPressedF, bool isPressedArrow)
     {
         switch (Counter)
         {
             case 1:
-                //if (isPressedF) Counter++;
-                
-                Counter_1(isPressedF, isPressedArrow);
-
+                Counter_1();
                 break;
 
             case 2:
-                //if (isPressedF) Counter++;
-                Counter_2(isPressedF, isPressedArrow);
+                Counter_2(isPressedF);
                 break;
 
             case 3:
-                if (!BuyItems(isPressedF, isPressedArrow))
+                if (!BuyItems(isPressedF))
                 {
-                    Counter-= 2;
+                    Counter -= 2;
                 }
-
-                //BuyItems(isPressedF, isPressedArrow);
                 break;
 
             case 4:
@@ -180,7 +158,7 @@ public class ShopBilding : MonoBehaviour
         }
     }
 
-    void Counter_1(bool isPressedF, bool isPressedArrow)
+    void Counter_1()
     {
         string input = null;
         SetSizeOfMarksInArray(selected, 2);
@@ -199,7 +177,7 @@ public class ShopBilding : MonoBehaviour
         Sync(input);
     }
 
-    void Counter_2(bool isPressedF, bool isPressedArrow)
+    void Counter_2(bool isPressedF)
     {
         if (isPressedF && CheckExit(1))
         {
@@ -227,7 +205,7 @@ public class ShopBilding : MonoBehaviour
         }
     }
 
-    bool BuyItems(bool isPressedF, bool isPressedArrow)
+    bool BuyItems(bool isPressedF)
     {
         if (isPressedF && CheckExit(2))
         {
@@ -311,6 +289,4 @@ public class ShopBilding : MonoBehaviour
     {
         dialogText.GetComponent<Text>().text = input;
     }
-
-
 }
